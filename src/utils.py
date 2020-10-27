@@ -3,8 +3,6 @@ from bs4 import BeautifulSoup as bs
 import requests
 import json
 import sys
-import os.path
-from os import path
 from secret_utils import get_owner_user_id, get_uuid_map, get_rest_api_key, read_token_info, write_token_info
 
 

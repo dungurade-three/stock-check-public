@@ -26,7 +26,6 @@ def get_stock_status(url, product_name, shop):
     doc_text = doc.text
     with open('doc_text.txt', 'w+') as f:
         f.write(doc_text)
-    f.close()
     try:
         soup = bs(doc_text, 'html.parser')
     except Exception as e:

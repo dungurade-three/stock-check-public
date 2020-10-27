@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 import os.path
-from os import path
 
 PROJ_DIR = os.path.realpath(os.path.dirname(__file__) + "/..")
 
@@ -54,4 +53,3 @@ def write_token_info(access_token, refresh_token, user_id):
     p = "{}/stock-check-secret/{}.json".format(PROJ_DIR, filename)
     with open(p, 'w+') as f:
         json.dump(data, f)
-    f.close()
