@@ -1,0 +1,3 @@
+[submodule "stock-check-secret"]
+	path = stock-check-secret
+	url = https://github.com/dungurade-three/stock-check-secret.git
