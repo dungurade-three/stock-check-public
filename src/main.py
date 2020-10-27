@@ -6,7 +6,7 @@ import sys
 import time
 from threading import Thread
 from flask import Flask, request, redirect
-from utils import get_token, renew_token, send_talk_msg, send_talk_msg_to_me, read_token_info
+from utils import get_token, renew_token, send_talk_msg, send_talk_msg_to_me, read_token_info, write_text
 from secret_utils import get_product_info, get_rest_api_key, get_redirect_url_map, get_owner_user_id
 
 app = Flask(__name__)
@@ -61,6 +61,16 @@ def get_stock_status(url, product_name, shop):
                     'status': int(target_opt.attrs['data-stckqty']) > 0,
                     'unknown_key': []
                 }
+                # save as html
+                current_datetime = get_current_datetime()
+                proj_dir = os.path.realpath(os.path.dirname(__file__) + "/..")
+                html_dir = "{}/html".format(proj_dir)
+                is_exists = os.path.exists(html_dir)
+                if not is_exists:
+                    os.makedirs(html_dir)
+                
+                p= "{}/[{}]{}.html".format(html_dir, current_datetime, shop)
+                write_text(doc_text, p)
 
                 for span_tag in target_opt.find_all('span'):
                     if 'class' in span_tag.attrs:
@@ -96,6 +106,17 @@ def get_stock_status(url, product_name, shop):
         }
         buy_tag = soup.find('a', option)
         if buy_tag:
+            # save as html
+            current_datetime = get_current_datetime()
+            proj_dir = os.path.realpath(os.path.dirname(__file__) + "/..")
+            html_dir = "{}/html".format(proj_dir)
+            is_exists = os.path.exists(html_dir)
+            if not is_exists:
+                os.makedirs(html_dir)
+            
+            p= "{}/[{}]{}.html".format(html_dir, current_datetime, shop)
+            write_text(doc_text, p)
+
             stock_info = {
                     'status': True,
                     'text': buy_tag.string
