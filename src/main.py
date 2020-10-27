@@ -30,6 +30,7 @@ def get_stock_status(url, product_name, shop):
                 return False, msg
             time.sleep(60)
 
+    doc_text = doc.text
     try:
         soup = bs(doc_text, 'html.parser')
     except Exception as e:
