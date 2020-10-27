@@ -18,10 +18,17 @@ HOST_MAP = {
 
 
 def get_stock_status(url, product_name, shop):
-    try:
-        doc = requests.get(url)
-    except requests.exceptions.RequestException as e:
-        return False, 'requests error: {}'.format(e)
+    retry_count = 5
+    for i in range(retry_count):
+        try:
+            doc = requests.get(url)
+            break
+        except requests.exceptions.RequestException as e:
+            msg = 'requests error: {}'.format(e)
+            print('{}\nretrying...{}({})'.format(msg, i, retry_count))
+            if i == retry_count:
+                return False, msg
+            time.sleep(60)
 
     doc_text = doc.text
     with open('doc_text.txt', 'w+') as f:
