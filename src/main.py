@@ -252,7 +252,7 @@ def stock_check():
                 return
 
         period = 10
-        print('sleep for a while.. ({})').format(period)
+        print('sleep for a while.. ({})'.format(period))
         time.sleep(period)
         count += 1
         if count%(60*60/period) == 0:
