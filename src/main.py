@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 import json
 import sys
+import os.path
 import time
 from threading import Thread
 from flask import Flask, request, redirect
