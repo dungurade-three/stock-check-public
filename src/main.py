@@ -6,7 +6,7 @@ import sys
 import time
 from threading import Thread
 from flask import Flask, request, redirect
-from utils import get_token, renew_token, send_talk_msg, send_talk_msg_to_me, read_token_info, write_text
+from utils import get_token, renew_token, send_talk_msg, send_talk_msg_to_me, read_token_info, write_text, get_current_datetime
 from secret_utils import get_product_info, get_rest_api_key, get_redirect_url_map, get_owner_user_id
 
 app = Flask(__name__)
