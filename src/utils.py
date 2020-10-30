@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 import json
 import sys
+from datetime import datetime
 from secret_utils import get_owner_user_id, get_uuid_map, get_rest_api_key, read_token_info, write_token_info
 
 
@@ -133,3 +134,13 @@ def send_talk_msg_to_me(msg, web_url, mobile_web_url):
     if r.status_code != 200:
         print(r.text)
         renew_token(refresh_token)
+
+
+def write_text(text, p):
+    with open(p, 'w') as f:
+        f.write(text)
+
+
+def get_current_datetime():
+    now = datetime.now()
+    return now.strftime("%Y-%m-%d-%H:%M:%S")
