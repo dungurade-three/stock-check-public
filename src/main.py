@@ -213,6 +213,10 @@ def stock_check():
         '11st': True,
         'ssg': True,
     }
+    prev_status = {
+        '11st': False,
+        'ssg': False,
+    }
     while True:
         # 11번가
         if check_status['11st']:
@@ -232,10 +236,12 @@ def stock_check():
                     msg = msg_template.format(product_info['11st']['product_name'],
                                             "\n".join(infos))
                     url = product_info['iphone']['url']
-                    send_talk_msg_to_me(msg, url, url)
-                    send_talk_msg(msg, url, url, 'suk')
-                    check_status['11st'] = False
+                    if not prev_status['11st']:
+                        send_talk_msg_to_me(msg, url, url)
+                        send_talk_msg(msg, url, url, 'suk')
+                    prev_status['11st'] = True
                 else:
+                     prev_status['11st'] = False
                     if noti_no_stock:
                         msg = '11번가 재고없음ㅠㅠ\n{}\n(한시간에 한번만 알림)'.format(data['text'])
                         url = product_info['11st']['url']
@@ -260,12 +266,12 @@ def stock_check():
                     msg = msg_template.format(product_info['ssg']['product_name'],
                                             data['text'])
                     url = product_info['ssg']['url']
-                    
-                    send_talk_msg_to_me(msg, url, url)
-                    send_talk_msg(msg, url, url, 'suk')
-                    check_status['ssg'] = False
-
+                    if not prev_status['ssg']:
+                        send_talk_msg_to_me(msg, url, url)
+                        send_talk_msg(msg, url, url, 'suk')
+                    prev_status['ssg'] = True
                 else:
+                    prev_status['ssg'] = False
                     if noti_no_stock:
                         msg = 'SSG 재고없음ㅠㅠ\n{}\n(한시간에 한번만 알림)'.format(data['text'])
                         url = product_info['ssg']['url']
