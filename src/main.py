@@ -277,7 +277,7 @@ def stock_check():
                 send_talk_msg_to_me(msg, url, url)
                 return
 
-        period = 10
+        period = 60
         print('sleep for a while.. ({})'.format(period))
         time.sleep(period)
         count += 1
